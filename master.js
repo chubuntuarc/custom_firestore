@@ -1,5 +1,5 @@
 //Script con instrucciones base y constantes del sistema.     //
-//Version 0.3.0-b.                                           //
+//Version 0.4.0-b.                                           //
 //Usa MaterializeCss 1.0.0.                                 //
 //Firestore                                               //
 //https://github.com/chubuntuarc/custom_firestore.git    //
@@ -131,8 +131,7 @@ function M_table(collection, tipo_tabla, ubicacion_html, headers, rows, types) {
 
     objetivo.innerHTML = tabla;
 
-    function generarRenglones() { //Funcion interna, controlada con tiempo.//
-
+    setTimeout(function () { 
         document.getElementsByClassName('progress')[0].style.display = 'none';
 
         //Generar rows de la tabla.//
@@ -164,8 +163,8 @@ function M_table(collection, tipo_tabla, ubicacion_html, headers, rows, types) {
                 });
                 /*body += '<td>' + doc.data().folio + '</td>';*/
                 body += '</tr>';
-                document.getElementsByTagName('tbody')[1].insertRow(0);
-                document.getElementsByTagName('tbody')[1].rows[0].innerHTML = body;
+                document.getElementById('tabla_dinamica_body').insertRow(0);
+                document.getElementById('tabla_dinamica_body').rows[0].innerHTML = body;
             });
         } else if (tipo_tabla === 1) { //Si es un arreglo creado manualmente con M_objeto.//
             collection.forEach(doc => {
@@ -195,12 +194,11 @@ function M_table(collection, tipo_tabla, ubicacion_html, headers, rows, types) {
                     contador++;
                 });
                 body += '</tr>';
-                document.getElementsByTagName('tbody')[1].insertRow(0);
-                document.getElementsByTagName('tbody')[1].rows[0].innerHTML = body;
+                document.getElementById('tabla_dinamica_body').insertRow(0);
+                document.getElementById('tabla_dinamica_body').rows[0].innerHTML = body;
             });
         }
-
-    } setTimeout(generarRenglones, 3000); //Ejecutar a los 3 segundos.//
+    }, 3000);
 
 
 
